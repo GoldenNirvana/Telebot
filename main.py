@@ -1,21 +1,10 @@
 import telebot
-from telebot import types
 
 f = 0
 
 bot = telebot.TeleBot('5219483490:AAG1_zB0MxWTgZZNc0gM3ptlOqd1soLBjns')
 
 symbols = ['\U000025AA', '\U0001f3a5']
-
-
-@bot.message_handler(commands=['start'])
-def buttons(message):
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn1 = types.KeyboardButton("Волосы")
-    btn2 = types.KeyboardButton("Зарплата")
-    markup.add(btn1, btn2)
-    bot.send_message(message.chat.id, "Кнопки обновлены", reply_markup=markup)
-
 
 @bot.message_handler()
 def get_text(message):
