@@ -6,6 +6,7 @@ bot = telebot.TeleBot('5219483490:AAG1_zB0MxWTgZZNc0gM3ptlOqd1soLBjns')
 
 symbols = ['\U000025AA', '\U0001f3a5']
 
+
 @bot.message_handler()
 def get_text(message):
     global f
@@ -14,10 +15,6 @@ def get_text(message):
         return
     if message.text == "Зарплата":
         f = 2
-        return
-    if message.text == "Спокойной ночи":
-        bot.send_photo(message.chat.id, open("C://users/nirvana/desktop/me.jpg", "rb"))
-        bot.send_message(message.chat.id,"Сладких слов")
         return
 
     count_of_worid = 0
@@ -51,10 +48,16 @@ def get_text(message):
 
     f = 0
     bot.send_message(message.chat.id, text, parse_mode='html')
+    raise ValueError("yra")
 
 
 def main():
-    bot.polling(none_stop=True)
+    while True:
+        try:
+            bot.polling(none_stop=True)
+        finally:
+            print("w")
+            main()
 
 
 if __name__ == '__main__':
