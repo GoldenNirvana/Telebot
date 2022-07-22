@@ -42,7 +42,12 @@ def get_text(message):
             if word[0] == '\U000025AA':
                 count_of_worid = 2
             stri = "<b>" + word + "</b>"
-            text = text.replace(word, stri, 1)
+            if len(word) == 1:
+                a = ' ' + word + ' '
+                b = ' ' + stri + ' '
+                text = text.replace(a, b, 1)
+            else:
+                text = text.replace(word, stri, 1)
         prev = word
 
     tex = '\U0001F4E9' + "Отправить заявку на кастинг:"
