@@ -62,14 +62,18 @@ def get_text(message):
     ind += 9
 
     flag = False
+    endless = False
     while ind < len(text):
+        if text[ind] == '\n':
+            endless = True
         if text[ind] == '-' and not flag:
             flag = True
             ind += 1
         if text[ind] in letters and flag:
             flag = False
             text = text[:ind] + text[ind].upper() + text[(ind + 1):]
-        if flag:
+            endless = False
+        if flag and endless:
             text = text[:ind] + text[(ind + 1):]
         else:
             ind += 1
