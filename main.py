@@ -7,6 +7,9 @@ bot = telebot.TeleBot('5219483490:AAG1_zB0MxWTgZZNc0gM3ptlOqd1soLBjns')
 
 symbols = ['\U000025AA', '\U0001f3a5']
 
+letters = 'zxcvbnmasdfghjklqwertyuiopZXCVBNMASDFGHJKLQWERTYUIOP' \
+          'ёйцукенгшщзхъфывапролджэячсмитььбюЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ'
+
 
 @bot.message_handler(commands=['start'])
 def buttons(message):
@@ -53,14 +56,30 @@ def get_text(message):
     tex = '\U0001F4E9' + "Отправить заявку на кастинг:"
     text = text.replace(tex, "<b>" + tex + "</b>")
 
+    ind = 0
+    while not (text[ind:ind + 9] == 'В заявке:'):
+        ind += 1
+    ind += 9
+
+    flag = False
+    while ind < len(text):
+        if text[ind] == '-' and not flag:
+            flag = True
+            ind += 1
+        if text[ind] in letters and flag:
+            flag = False
+            text = text[:ind] + text[ind].upper() + text[(ind + 1):]
+        if flag:
+            text = text[:ind] + text[(ind + 1):]
+        else:
+            ind += 1
+
     hairs = "\n\n<b>ПРИМЕЧАНИЕ ОТ ЧАТА NEW CASTING:</b> Девушки берегите свои волосы, подобная работа может испортить вам волосы"
     plat = "\n\n<b>ПРИМЕЧАНИЕ ОТ ЧАТА NEW CASTING:</b> БУДЬТЕ ОСТОРОЖНЫ, ВЫСОКИЙ ГОНОРАР МОЖЕТ БЫТЬ УЛОВКОЙ МОШЕННИКОВ"
-
     if f == 1:
         text = text + hairs
     if f == 2:
         text = text + plat
-
     f = 0
     bot.send_message(message.chat.id, text, parse_mode='html')
     raise ValueError("yra")
@@ -71,7 +90,7 @@ def main():
         try:
             bot.polling(none_stop=True)
         finally:
-            print("w")
+            print("Message received")
             main()
 
 
