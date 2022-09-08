@@ -1,10 +1,10 @@
+import json
+
 from telebot import types
 import telebot
 
 f = 0
-
 bot = telebot.TeleBot('5219483490:AAG1_zB0MxWTgZZNc0gM3ptlOqd1soLBjns')
-
 symbols = ['\U000025AA', '\U0001f3a5']
 
 letters = 'zxcvbnmasdfghjklqwertyuiopZXCVBNMASDFGHJKLQWERTYUIOP' \
@@ -46,9 +46,9 @@ def get_text(message):
                 count_of_worid = 2
             stri = "<b>" + word + "</b>"
             if len(word) == 1:
-                a = ' ' + word + ' '
-                b = ' ' + stri + ' '
-                text = text.replace(a, b, 1)
+                aa = ' ' + word + ' '
+                bb = ' ' + stri + ' '
+                text = text.replace(aa, bb, 1)
             else:
                 text = text.replace(word, stri, 1)
         prev = word
@@ -82,7 +82,7 @@ def get_text(message):
         text = text + plat
     f = 0
     bot.send_message(message.chat.id, text, parse_mode='html')
-    raise ValueError("yra")
+    raise ValueError("Костыль.")
 
 
 def main():
